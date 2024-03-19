@@ -13,8 +13,12 @@ typedef struct NODE{
 	struct NODE* pNext;
 } node;
 
-void createNode(node* newNode, node* next, userdata data){
-	newNode->pNext = 
+void createNode(userdata *user){
+	node* newNode = (node*)malloc(sizeof(node));
+	newNode.data = user;
+	newNode->pNext = NULL;
+	
+	return newNode;
 }
 
 int main(){
