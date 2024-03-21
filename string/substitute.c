@@ -2,25 +2,48 @@
 #include <string.h>
 #include <stdlib.h>
 
-char* substitute(char* const origin, char* target, char* replacement){
-	size_t origin_len = strlen(origin);
-	size_t target_len = strlen(target);
-	size_t replacement_len = strlen(replacement);
+char* substitute(char* const origin, char* target, char* replace){
+	int origin_len = strlen(origin);
+	int target_len = strlen(target);
+	int replace_len = strlen(replace);
+	char* compare = malloc(target_len + 1);
+	char* result = calloc(origin_len + replace_len - target_len + 1, sizeof(char));
+	int result_len = origin_len + replace_len - target_len;
 
 	for(int i = 0; i < origin_len; i++){
-		for(int j = 0; j < 
-		if(origin[i] == 
-
+		if(origin[i] == target[0]){ // target
+			for(int j = 0; j < target_len; j++){
+				compare[j] = origin[i + j];
+			}
+			if(strcmp(compare, target) == 0){ // 찾았다면
+				// target 전까지 문자열 복사
+				for(int j = 0; j < i; j++){
+					result[j] = origin[j];
+				}
+				//replace 문자 삽입
+				int index = 0;
+				for(int j = i; j < replace_len; j++){
+					result[j] = replace[index];
+					index++;
+				}
+				// replace 뒤 나머지 문자열 삽입
+				index = i + target_len;
+				for(int j = i + replace_len; j < result_len; j++){
+					result[j] = origin[index];
+					index++;
+				}
+				return result;
+			}
+		}
+	}
 }
 
 int main(){
-	char* origin = "hello world!";
+	char* origin = "hello world!, hello universe, hello Daniel";
 	char* target = "hello";
-	char* replacement = "hi";
-
-	// char* result = substitute(origin, target, replacement);
+	char* replace = "hi";
 	
-	printf("%c\n", origin[1]);
+	printf("%s\n", substitute(origin, target, replace));
 
 	return 1;
 }
