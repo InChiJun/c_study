@@ -1,14 +1,24 @@
 #include <stdio.h>
-#include <string.h>
+
+char* strcpy(char* dest, const char* src){
+	for(int i = 0; src[i] != 0; i++){
+		dest[i] = src[i];
+	}
+	/*
+	while(*src){
+		*dest++ = *src++;
+	}
+	*/
+
+	return dest;
+}
 
 int main(){
-	char str[20] = "hello world!!!\n";
+	char str_src[20] = "hello world!!!";
+	char str_dst[20];
 
-	char str_c[20] = "good job!\n";
+	strcpy(str_dst, str_src);
+	printf("%s\n", str_dst);
 
-	printf("str_c = %s\n", str_c);
-	strcpy(str_c, str);
-	printf("str_c = %s\n", str_c);
-	
 	return 1;
 }
