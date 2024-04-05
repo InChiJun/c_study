@@ -1,11 +1,15 @@
 #include <stdio.h>
+#include <string.h>
 
 int main(){
-	int arry[] = {0, 1, 2, 3};
-
-	int* one = arry[1];
-
-	printf("one = %d\n", one);
+	char id[20];
+	char* checkSpace = " ";
+	
+	do
+    {
+        printf("Please enter your name: ");
+        fgets(id, 20, stdin);
+    } while(strstr(id, checkSpace) != NULL);
 
 	return 1;
 }
