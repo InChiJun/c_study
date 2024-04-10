@@ -3,11 +3,35 @@
 #include <stdio.h>
 #include <stdbool.h>
 #include <stdlib.h>
+#include <string.h>
+
+int findIndex(const char** arr, const char* target, size_t len){
+	for(int i = 0; i < len; i++){
+		if(strcmp(arr[i], target) == 0){
+			return i;
+		}
+	}
+	return -1;
+}
 
 char** solution(const char* players[], size_t players_len, const char* callings[], size_t callings_len) {
-	for(int i = 0; i < callings_len; i++){
+	char** answer = (char**)malloc(players_len * sizeof(char*));
+	int i;
+	int index = 0;
+
+	// answer에 값 복사
+	for(i = 0; i < players_len; i++){
+		answer[i] = players[i];
 	}
-	char** answer = (char**)malloc(1);
+
+	// callings 값 반영해서 answer 수정
+	for(i = 0; i < callings_len; i++){
+		index = findIndex(answer, callings[i], players_len);
+		char* temp = answer[index];
+		answer[index] = answer[index - 1];
+		answer[index - 1] = temp;
+	}
+
 	return answer;
 }
 
@@ -17,11 +41,14 @@ int main(){
 	const char* callings[] = {"kai", "kai", "mine", "mine"};
 	size_t callings_len = 4;
 
-	char** result = solution(players, players_len, callings, callings_len);
+	const char** result = solution(players, players_len, callings, callings_len);
 
-    /*
-    for(int i = 0; i < 13; i++){
-        printf("%s\n", a[i]);
+    
+    for(int i = 0; i < players_len; i++){
+        printf("%s\n", result[i]);
     }
-    */
+
+	free(result);
+    
+	return 1;
 }
