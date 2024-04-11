@@ -114,5 +114,7 @@ int main(){
 
     printf("%d, %d", result[0], result[1]);
 
+    free(result);
+
     return 1;
 }
