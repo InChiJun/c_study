@@ -8,14 +8,16 @@ int main(){
         printf("Find success!\n");
     }
 
-    char* routes[] = {"E 2","S 2","W 1"};
-    char* direct;
-    int num = 0;
+    char routes[3][3] = {"E 2","S 2","W 1"};
+    char direct = routes[0][0];
+    int num = atoi(&routes[0][2]);
 
-    direct = strtok(routes[0], " ");
-    num = strtok(NULL, " ");
+    int* answer = (int*)malloc(sizeof(int) * 2);
 
-    printf("%s, %d\n", direct, num);
+    answer[0] = 0;
+    answer[1] = 0;
+
+    printf("%d, %d\n", answer[0], answer[1]);
 
     return 1;
 }

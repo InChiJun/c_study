@@ -1,9 +1,0 @@
-{    
-    "makefile.launchConfigurations": [        
-        {
-            "cwd": "/mnt/d/share/project/main",
-            "binaryPath": "/mnt/d/share/project/main/main_make",
-            "binaryArgs": []
-        }
-    ]
-}
