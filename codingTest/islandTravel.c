@@ -8,7 +8,7 @@
 // maps_len은 배열 maps의 길이입니다.
 // 파라미터로 주어지는 문자열은 const로 주어집니다. 변경하려면 문자열을 복사해서 사용하세요.
 
-typedef struct node_
+typedef struct node_ // 현재 좌표 저장하는 구조체
 {
     int h,w;
 } node;
@@ -19,28 +19,28 @@ bool visit[105][105];
 
 int BFS(const char* map[], node st, int H,int W)
 {
-    node queue[10005];
+    node queue[10005]; // 유효한 좌표 저장하는 큐
     int f=-1,r=-1;
 
     queue[++r] = st;
     visit[st.h][st.w] = 1;
 
-    int tot = 0;
+    int tot = 0; // 유효한 좌표의 값을 모두 더한 total
     while(f<r)
     {
         node now = queue[++f];
-        tot += map[now.h][now.w] - '0';
+        tot += map[now.h][now.w] - '0'; // total값에 아스키코드 파싱해서 유효값 더하는 코드
 
         for(int i=0;i<4;i++)
         {
-            node move = {now.h + dir[i][0], now.w + dir[i][1]};
+            node move = {now.h + dir[i][0], now.w + dir[i][1]}; // 이동할 유효한 좌표
 
-            if(move.h < 0 || move.w <0 || move.h >= H || move.w >= W) 
+            if(move.h < 0 || move.w <0 || move.h >= H || move.w >= W)
                 continue;
             if(map[move.h][move.w] == 'X' || visit[move.h][move.w])
                 continue;
 
-            queue[++r] = move;
+            queue[++r] = move; // 이동할 좌표를 큐에 삽입
             visit[move.h][move.w] = 1;
         }
     }
